@@ -1,6 +1,7 @@
 # Animal-feeding-Phase-I
 
 ## Aim: 
+To develop a animal feeding game-Phase-1 using unity.
 
 ## Algorithm:
 
@@ -21,7 +22,79 @@
 ### Step 6: Edit their speed values and test to see how it looks. Drag all three animals into the Prefabs folder, choosing “Original Prefab”
 
 ## Program:
+### Player Control: 
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics.Contracts;
+using System.Security.Cryptography;
+using System.Threading;
+using UnityEngine;
+
+public class playercontroller : MonoBehaviour
+{
+    public float horizontalInput;
+    public float speed = 10.0f;
+    public float xRange = 15f;
+    public GameObject projectilePrefab;//for reuseing the object
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.x < -xRange)
+        {
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > xRange)
+        {
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+
+        }
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
+        }
+
+    }
+}
+~~~
+### Move Forward:
+~~~
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using UnityEngine;
+
+public class moveforward : MonoBehaviour
+{
+    public float speed = 40.0f;
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+    }
+}
+~~~
 
 ## Output:
 
+![img1]()
+
 ## Result:
+Animal feeding game-Phase-1 using unity is developed successfully.
